@@ -1,5 +1,6 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import pg from 'pg';
 
 const DB_DIR = resolve(import.meta.dirname, '../db');
@@ -53,7 +54,9 @@ async function migrate(client) {
 
 async function seed(client) {
   for (const file of await listFiles('seeds', '.mjs')) {
-    const { default: run } = await import(join(DB_DIR, 'seeds', file));
+    const { default: run } = await import(
+      pathToFileURL(join(DB_DIR, 'seeds', file)).href
+    );
     await run(client);
     console.log(`seeded ${file}`);
   }
