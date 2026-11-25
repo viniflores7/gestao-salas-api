@@ -1,0 +1,37 @@
+{
+  "name": "gestao-salas-api",
+  "version": "0.0.1",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "node --watch --env-file-if-exists=.env src/main.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/main.js",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint src/ test/",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "test": "vitest run",
+    "test:e2e": "vitest run --config ./vitest.config.e2e.ts",
+    "db:migrate": "node --env-file-if-exists=.env scripts/db.mjs migrate",
+    "db:seed": "node --env-file-if-exists=.env scripts/db.mjs seed"
+  },
+  "dependencies": {
+    "express": "^5.3.0",
+    "pg": "^8.23.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^24.19.4",
+    "@types/pg": "^8.23.1",
+    "@types/supertest": "^7.2.1",
+    "oxlint": "^1.95.0",
+    "prettier": "^3.10.1",
+    "supertest": "^7.3.2",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.2"
+  }
+}
